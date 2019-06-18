@@ -1,25 +1,80 @@
-# This configuration file is used to build and deploy the app into a 
-# GKE cluster using Google Cloud Build.
-#
-# PREREQUISITES:
-# - Cloud Build service account must have role: "Kubernetes Engine Developer"
-
-# USAGE:
-# GCP zone and GKE target cluster must be specified as substitutions
-# Example invocation:
-# `gcloud builds submit --config=cloudbuild.yaml --substitutions=_ZONE=us-central1-b,_CLUSTER=demo-app-staging .`
-
+# gcloud builds submit --project arctiqteam-images --timeout=3600s --substitutions=TAG_NAME="v1.0.0"
 steps:
-- id: 'Deploy application to cluster'
-  name: 'gcr.io/k8s-skaffold/skaffold:v0.20.0'
-  entrypoint: 'bash'
-  args: 
-  - '-c'
-  - > 
-    gcloud container clusters get-credentials --zone=$_ZONE $_CLUSTER;
-    skaffold run -f=skaffold.yaml --default-repo=gcr.io/$PROJECT_ID;
-
-# Add more power, and more time, for heavy Skaffold build
-timeout: '3600s'
-options:
-  machineType: 'N1_HIGHCPU_8'
+- name: 'gcr.io/cloud-builders/docker'
+  args:
+    - 'build'
+    - '-t'
+    - 'gcr.io/$PROJECT_ID/microservices-demo/adservice:$TAG_NAME'
+    - './src/adservice'
+- name: 'gcr.io/cloud-builders/docker'
+  args:
+    - 'build'
+    - '-t'
+    - 'gcr.io/$PROJECT_ID/microservices-demo/cartservice:$TAG_NAME'
+    - './src/cartservice'
+- name: 'gcr.io/cloud-builders/docker'
+  args:
+    - 'build'
+    - '-t'
+    - 'gcr.io/$PROJECT_ID/microservices-demo/checkoutservice:$TAG_NAME'
+    - './src/checkoutservice'
+- name: 'gcr.io/cloud-builders/docker'
+  args:
+    - 'build'
+    - '-t'
+    - 'gcr.io/$PROJECT_ID/microservices-demo/currencyservice:$TAG_NAME'
+    - './src/currencyservice'
+- name: 'gcr.io/cloud-builders/docker'
+  args:
+    - 'build'
+    - '-t'
+    - 'gcr.io/$PROJECT_ID/microservices-demo/emailservice:$TAG_NAME'
+    - './src/emailservice'
+- name: 'gcr.io/cloud-builders/docker'
+  args:
+    - 'build'
+    - '-t'
+    - 'gcr.io/$PROJECT_ID/microservices-demo/frontend:$TAG_NAME'
+    - './src/frontend'
+- name: 'gcr.io/cloud-builders/docker'
+  args:
+    - 'build'
+    - '-t'
+    - 'gcr.io/$PROJECT_ID/microservices-demo/loadgenerator:$TAG_NAME'
+    - './src/loadgenerator'
+- name: 'gcr.io/cloud-builders/docker'
+  args:
+    - 'build'
+    - '-t'
+    - 'gcr.io/$PROJECT_ID/microservices-demo/paymentservice:$TAG_NAME'
+    - './src/paymentservice'
+- name: 'gcr.io/cloud-builders/docker'
+  args:
+    - 'build'
+    - '-t'
+    - 'gcr.io/$PROJECT_ID/microservices-demo/productcatalogservice:$TAG_NAME'
+    - './src/productcatalogservice'
+- name: 'gcr.io/cloud-builders/docker'
+  args:
+    - 'build'
+    - '-t'
+    - 'gcr.io/$PROJECT_ID/microservices-demo/recommendationservice:$TAG_NAME'
+    - './src/recommendationservice'
+- name: 'gcr.io/cloud-builders/docker'
+  args:
+    - 'build'
+    - '-t'
+    - 'gcr.io/$PROJECT_ID/microservices-demo/shippingservice:$TAG_NAME'
+    - './src/shippingservice'
+images:
+  - gcr.io/$PROJECT_ID/microservices-demo/adservice:$TAG_NAME
+  - gcr.io/$PROJECT_ID/microservices-demo/cartservice:$TAG_NAME
+  - gcr.io/$PROJECT_ID/microservices-demo/checkoutservice:$TAG_NAME
+  - gcr.io/$PROJECT_ID/microservices-demo/currencyservice:$TAG_NAME
+  - gcr.io/$PROJECT_ID/microservices-demo/emailservice:$TAG_NAME
+  - gcr.io/$PROJECT_ID/microservices-demo/frontend:$TAG_NAME
+  - gcr.io/$PROJECT_ID/microservices-demo/loadgenerator:$TAG_NAME
+  - gcr.io/$PROJECT_ID/microservices-demo/paymentservice:$TAG_NAME
+  - gcr.io/$PROJECT_ID/microservices-demo/productcatalogservice:$TAG_NAME
+  - gcr.io/$PROJECT_ID/microservices-demo/recommendationservice:$TAG_NAME
+  - gcr.io/$PROJECT_ID/microservices-demo/shippingservice:$TAG_NAME

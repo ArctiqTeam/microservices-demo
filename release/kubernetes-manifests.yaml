@@ -20,6 +20,7 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: emailservice
+  namespace: hipster-store
 spec:
   selector:
     matchLabels:
@@ -32,12 +33,14 @@ spec:
       terminationGracePeriodSeconds: 5
       containers:
       - name: server
-        image: gcr.io/google-samples/microservices-demo/emailservice:v0.1.1
+        image: gcr.io/arctiqteam-images/microservices-demo/emailservice:v1.0.0
         ports:
         - containerPort: 8080
         env:
         - name: PORT
           value: "8080"
+        - name: ENABLE_PROFILER
+          value: "0"
         readinessProbe:
           periodSeconds: 5
           exec:
@@ -46,9 +49,6 @@ spec:
           periodSeconds: 5
           exec:
             command: ["/bin/grpc_health_probe", "-addr=:8080"]
-        env:
-        - name: ENABLE_PROFILER
-          value: "0"
         resources:
           requests:
             cpu: 100m
@@ -61,6 +61,7 @@ apiVersion: v1
 kind: Service
 metadata:
   name: emailservice
+  namespace: hipster-store
 spec:
   type: ClusterIP
   selector:
@@ -74,6 +75,7 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: checkoutservice
+  namespace: hipster-store
 spec:
   selector:
     matchLabels:
@@ -85,7 +87,7 @@ spec:
     spec:
       containers:
         - name: server
-          image: gcr.io/google-samples/microservices-demo/checkoutservice:v0.1.1
+          image: gcr.io/arctiqteam-images/microservices-demo/checkoutservice:v1.0.0
           ports:
           - containerPort: 5050
           readinessProbe:
@@ -123,6 +125,7 @@ apiVersion: v1
 kind: Service
 metadata:
   name: checkoutservice
+  namespace: hipster-store
 spec:
   type: ClusterIP
   selector:
@@ -136,6 +139,7 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: recommendationservice
+  namespace: hipster-store
 spec:
   selector:
     matchLabels:
@@ -148,7 +152,7 @@ spec:
       terminationGracePeriodSeconds: 5
       containers:
       - name: server
-        image: gcr.io/google-samples/microservices-demo/recommendationservice:v0.1.1
+        image: gcr.io/arctiqteam-images/microservices-demo/recommendationservice:v1.0.0
         ports:
         - containerPort: 8080
         readinessProbe:
@@ -178,6 +182,7 @@ apiVersion: v1
 kind: Service
 metadata:
   name: recommendationservice
+  namespace: hipster-store
 spec:
   type: ClusterIP
   selector:
@@ -191,6 +196,7 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: frontend
+  namespace: hipster-store
 spec:
   selector:
     matchLabels:
@@ -202,7 +208,7 @@ spec:
     spec:
       containers:
         - name: server
-          image: gcr.io/google-samples/microservices-demo/frontend:v0.1.1
+          image: gcr.io/arctiqteam-images/microservices-demo/frontend:v1.0.0
           ports:
           - containerPort: 8080
           readinessProbe:
@@ -252,6 +258,7 @@ apiVersion: v1
 kind: Service
 metadata:
   name: frontend
+  namespace: hipster-store
 spec:
   type: ClusterIP
   selector:
@@ -265,6 +272,7 @@ apiVersion: v1
 kind: Service
 metadata:
   name: frontend-external
+  namespace: hipster-store
 spec:
   type: LoadBalancer
   selector:
@@ -278,6 +286,7 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: paymentservice
+  namespace: hipster-store
 spec:
   selector:
     matchLabels:
@@ -290,7 +299,7 @@ spec:
       terminationGracePeriodSeconds: 5
       containers:
       - name: server
-        image: gcr.io/google-samples/microservices-demo/paymentservice:v0.1.1
+        image: gcr.io/arctiqteam-images/microservices-demo/paymentservice:v1.0.0
         ports:
         - containerPort: 50051
         env:
@@ -314,6 +323,7 @@ apiVersion: v1
 kind: Service
 metadata:
   name: paymentservice
+  namespace: hipster-store
 spec:
   type: ClusterIP
   selector:
@@ -327,6 +337,7 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: productcatalogservice
+  namespace: hipster-store
 spec:
   selector:
     matchLabels:
@@ -339,7 +350,7 @@ spec:
       terminationGracePeriodSeconds: 5
       containers:
       - name: server
-        image: gcr.io/google-samples/microservices-demo/productcatalogservice:v0.1.1
+        image: gcr.io/arctiqteam-images/microservices-demo/productcatalogservice:v1.0.0
         ports:
         - containerPort: 3550
         env:
@@ -366,6 +377,7 @@ apiVersion: v1
 kind: Service
 metadata:
   name: productcatalogservice
+  namespace: hipster-store
 spec:
   type: ClusterIP
   selector:
@@ -379,6 +391,7 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: cartservice
+  namespace: hipster-store
 spec:
   selector:
     matchLabels:
@@ -391,7 +404,7 @@ spec:
       terminationGracePeriodSeconds: 5
       containers:
       - name: server
-        image: gcr.io/google-samples/microservices-demo/cartservice:v0.1.1
+        image: gcr.io/arctiqteam-images/microservices-demo/cartservice:v1.0.0
         ports:
         - containerPort: 7070
         env:
@@ -422,6 +435,7 @@ apiVersion: v1
 kind: Service
 metadata:
   name: cartservice
+  namespace: hipster-store
 spec:
   type: ClusterIP
   selector:
@@ -435,6 +449,7 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: loadgenerator
+  namespace: hipster-store
 spec:
   selector:
     matchLabels:
@@ -460,7 +475,7 @@ spec:
           value: "frontend:80"
       containers:
       - name: main
-        image: gcr.io/google-samples/microservices-demo/loadgenerator:v0.1.1
+        image: gcr.io/arctiqteam-images/microservices-demo/loadgenerator:v1.0.0
         env:
         - name: FRONTEND_ADDR
           value: "frontend:80"
@@ -478,6 +493,7 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: currencyservice
+  namespace: hipster-store
 spec:
   selector:
     matchLabels:
@@ -490,7 +506,7 @@ spec:
       terminationGracePeriodSeconds: 5
       containers:
       - name: server
-        image: gcr.io/google-samples/microservices-demo/currencyservice:v0.1.1
+        image: gcr.io/arctiqteam-images/microservices-demo/currencyservice:v1.0.0
         ports:
         - name: grpc
           containerPort: 7000
@@ -515,6 +531,7 @@ apiVersion: v1
 kind: Service
 metadata:
   name: currencyservice
+  namespace: hipster-store
 spec:
   type: ClusterIP
   selector:
@@ -528,6 +545,7 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: shippingservice
+  namespace: hipster-store
 spec:
   selector:
     matchLabels:
@@ -539,7 +557,7 @@ spec:
     spec:
       containers:
       - name: server
-        image: gcr.io/google-samples/microservices-demo/shippingservice:v0.1.1
+        image: gcr.io/arctiqteam-images/microservices-demo/shippingservice:v1.0.0
         ports:
         - containerPort: 50051
         env:
@@ -567,6 +585,7 @@ apiVersion: v1
 kind: Service
 metadata:
   name: shippingservice
+  namespace: hipster-store
 spec:
   type: ClusterIP
   selector:
@@ -580,6 +599,7 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: redis-cart
+  namespace: hipster-store
 spec:
   selector:
     matchLabels:
@@ -620,6 +640,7 @@ apiVersion: v1
 kind: Service
 metadata:
   name: redis-cart
+  namespace: hipster-store
 spec:
   type: ClusterIP
   selector:
@@ -633,6 +654,7 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: adservice
+  namespace: hipster-store
 spec:
   selector:
     matchLabels:
@@ -645,7 +667,7 @@ spec:
       terminationGracePeriodSeconds: 5
       containers:
       - name: server
-        image: gcr.io/google-samples/microservices-demo/adservice:v0.1.1
+        image: gcr.io/arctiqteam-images/microservices-demo/adservice:v1.0.0
         ports:
         - containerPort: 9555
         env:
@@ -675,6 +697,7 @@ apiVersion: v1
 kind: Service
 metadata:
   name: adservice
+  namespace: hipster-store
 spec:
   type: ClusterIP
   selector:

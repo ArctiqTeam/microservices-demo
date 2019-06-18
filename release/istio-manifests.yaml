@@ -20,6 +20,7 @@ apiVersion: networking.istio.io/v1alpha3
 kind: Gateway
 metadata:
   name: frontend-gateway
+  namespace: istio-system
 spec:
   selector:
     istio: ingressgateway # use Istio default gateway implementation
@@ -35,11 +36,12 @@ apiVersion: networking.istio.io/v1alpha3
 kind: VirtualService
 metadata:
   name: frontend-ingress
+  namespace: hipster-store
 spec:
   hosts:
-  - "*"
+  - "hipster-store.arctiqtim.next.gkeop.labs.arctiq.ca"
   gateways:
-  - frontend-gateway
+  - istio-system/frontend-gateway
   http:
   - route:
     - destination:
@@ -51,6 +53,7 @@ apiVersion: networking.istio.io/v1alpha3
 kind: VirtualService
 metadata:
   name: frontend
+  namespace: hipster-store
 spec:
   hosts:
   - "frontend.default.svc.cluster.local"
@@ -65,6 +68,7 @@ apiVersion: networking.istio.io/v1alpha3
 kind: ServiceEntry
 metadata:
   name: whitelist-egress-googleapis
+  namespace: hipster-store
 spec:
   hosts:
   - "accounts.google.com" # Used to get token
@@ -81,6 +85,7 @@ apiVersion: networking.istio.io/v1alpha3
 kind: ServiceEntry
 metadata:
   name: whitelist-egress-google-metadata
+  namespace: hipster-store
 spec:
   hosts:
   - metadata.google.internal
