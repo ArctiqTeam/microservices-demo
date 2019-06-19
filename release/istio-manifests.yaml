@@ -20,7 +20,7 @@ apiVersion: networking.istio.io/v1alpha3
 kind: Gateway
 metadata:
   name: frontend-gateway
-  namespace: istio-system
+  namespace: hipster-store
 spec:
   selector:
     istio: ingressgateway # use Istio default gateway implementation
@@ -39,9 +39,9 @@ metadata:
   namespace: hipster-store
 spec:
   hosts:
-  - "hipster-store.arctiqtim.next.gkeop.labs.arctiq.ca"
+  - "*"
   gateways:
-  - istio-system/frontend-gateway
+  - frontend-gateway
   http:
   - route:
     - destination:
