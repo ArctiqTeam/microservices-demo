@@ -20,7 +20,7 @@ apiVersion: networking.istio.io/v1alpha3
 kind: Gateway
 metadata:
   name: frontend-gateway
-  namespace: hipster-store
+  namespace: istio-system
 spec:
   selector:
     istio: ingressgateway # use Istio default gateway implementation
@@ -30,7 +30,19 @@ spec:
       name: http
       protocol: HTTP
     hosts:
-    - "*"
+    - "*.arctiqtim.next.gkeop.labs.arctiq.ca"
+    tls:
+      httpsRedirect: true
+  - hosts:
+    - "*.arctiqtim.next.gkeop.labs.arctiq.ca"
+    port:
+      name: https
+      number: 443
+      protocol: HTTPS
+    tls:
+      mode: SIMPLE
+      serverCertificate: /etc/istio/ingressgateway-certs/tls.crt
+      privateKey: /etc/istio/ingressgateway-certs/tls.key
 ---
 apiVersion: networking.istio.io/v1alpha3
 kind: VirtualService
@@ -39,9 +51,9 @@ metadata:
   namespace: hipster-store
 spec:
   hosts:
-  - "*"
+  - "hipster-store.arctiqtim.next.gkeop.labs.arctiq.ca"
   gateways:
-  - frontend-gateway
+  - istio-system/frontend-gateway
   http:
   - route:
     - destination:
