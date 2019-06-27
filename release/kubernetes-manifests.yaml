@@ -211,22 +211,22 @@ spec:
           image: gcr.io/arctiqteam-images/microservices-demo/frontend:v1.0.0
           ports:
           - containerPort: 8080
-          readinessProbe:
-            initialDelaySeconds: 10
-            httpGet:
-              path: "/_healthz"
-              port: 8080
-              httpHeaders:
-              - name: "Cookie"
-                value: "shop_session-id=x-readiness-probe"
-          livenessProbe:
-            initialDelaySeconds: 10
-            httpGet:
-              path: "/_healthz"
-              port: 8080
-              httpHeaders:
-              - name: "Cookie"
-                value: "shop_session-id=x-liveness-probe"
+          # readinessProbe:
+          #   initialDelaySeconds: 10
+          #   httpGet:
+          #     path: "/_healthz"
+          #     port: 8080
+          #     httpHeaders:
+          #     - name: "Cookie"
+          #       value: "shop_session-id=x-readiness-probe"
+          # livenessProbe:
+          #   initialDelaySeconds: 10
+          #   httpGet:
+          #     path: "/_healthz"
+          #     port: 8080
+          #     httpHeaders:
+          #     - name: "Cookie"
+          #       value: "shop_session-id=x-liveness-probe"
           env:
           - name: PORT
             value: "8080"
@@ -267,20 +267,20 @@ spec:
   - name: http
     port: 80
     targetPort: 8080
----
-apiVersion: v1
-kind: Service
-metadata:
-  name: frontend-external
-  namespace: hipster-store
-spec:
-  type: LoadBalancer
-  selector:
-    app: frontend
-  ports:
-  - name: http
-    port: 80
-    targetPort: 8080
+# ---
+# apiVersion: v1
+# kind: Service
+# metadata:
+#   name: frontend-external
+#   namespace: hipster-store
+# spec:
+#   type: LoadBalancer
+#   selector:
+#     app: frontend
+#   ports:
+#   - name: http
+#     port: 80
+#     targetPort: 8080
 ---
 apiVersion: apps/v1
 kind: Deployment
@@ -462,17 +462,17 @@ spec:
     spec:
       terminationGracePeriodSeconds: 5
       restartPolicy: Always
-      initContainers:
-      - name: wait-frontend
-        image: alpine:3.6
-        command: ['sh', '-c', 'set -x;  apk add --no-cache curl && 
-          until timeout -t 2 curl -f "http://${FRONTEND_ADDR}"; do 
-            echo "waiting for http://${FRONTEND_ADDR}"; 
-            sleep 2;
-          done;']
-        env:
-        - name: FRONTEND_ADDR
-          value: "frontend:80"
+      # initContainers:
+      # - name: wait-frontend
+      #   image: alpine:3.6
+      #   command: ['sh', '-c', 'set -x;  apk add --no-cache curl && 
+      #     until timeout -t 2 curl -f "http://${FRONTEND_ADDR}"; do 
+      #       echo "waiting for http://${FRONTEND_ADDR}"; 
+      #       sleep 2;
+      #     done;']
+      #   env:
+      #   - name: FRONTEND_ADDR
+      #     value: "frontend:80"
       containers:
       - name: main
         image: gcr.io/arctiqteam-images/microservices-demo/loadgenerator:v1.0.0
