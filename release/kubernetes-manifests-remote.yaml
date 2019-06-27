@@ -32,7 +32,7 @@ spec:
     spec:
       containers:
         - name: server
-          image: gcr.io/arctiqteam-images/microservices-demo/frontend:v1.0.0
+          image: gcr.io/arctiqteam-images/microservices-demo/frontend-remote:v1.0.1
           ports:
           - containerPort: 8080
           # readinessProbe:
