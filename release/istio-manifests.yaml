@@ -45,6 +45,24 @@
 #       privateKey: /etc/istio/ingressgateway-certs/tls.key
 ---
 apiVersion: networking.istio.io/v1alpha3
+kind: DestinationRule
+metadata:
+  name: frontend
+  namespace: hipster-store
+spec:
+  host: frontend
+  trafficPolicy:
+    tls:
+      mode: ISTIO_MUTUAL
+  subsets:
+  - name: local
+    labels:
+      cluster: local
+  - name: remote
+    labels:
+      cluster: remote
+---
+apiVersion: networking.istio.io/v1alpha3
 kind: VirtualService
 metadata:
   name: frontend-ingress
@@ -60,6 +78,14 @@ spec:
         host: frontend
         port:
           number: 80
+        subset: local
+      weight: 10
+    - destination:
+        host: frontend
+        port:
+          number: 80
+        subset: remote
+      weight: 90
 ---
 apiVersion: networking.istio.io/v1alpha3
 kind: VirtualService
@@ -70,6 +96,10 @@ spec:
   hosts:
   - "frontend.hipster-store.svc.cluster.local"
   http:
+  # - fault:
+  #     abort:
+  #       httpStatus: 500
+  #       percent: 100
   - route:
     - destination:
         host: frontend

@@ -25,14 +25,16 @@ spec:
   selector:
     matchLabels:
       app: frontend
+      cluster: remote
   template:
     metadata:
       labels:
         app: frontend
+        cluster: remote
     spec:
       containers:
         - name: server
-          image: gcr.io/arctiqteam-images/microservices-demo/frontend-remote:v1.0.1
+          image: gcr.io/arctiqteam-images/microservices-demo/frontend-remote:v1.0.2
           ports:
           - containerPort: 8080
           # readinessProbe:

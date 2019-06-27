@@ -201,10 +201,12 @@ spec:
   selector:
     matchLabels:
       app: frontend
+      cluster: local
   template:
     metadata:
       labels:
         app: frontend
+        cluster: local
     spec:
       containers:
         - name: server
