@@ -69,7 +69,7 @@ metadata:
   namespace: hipster-store
 spec:
   hosts:
-  - "hipster-store.arctiqtim.next.gkeop.labs.arctiq.ca"
+  - "hipster-store.arctiqtim-istio.next.gkeop.labs.arctiq.ca"
   gateways:
   - istio-system/frontend-gateway
   http:
