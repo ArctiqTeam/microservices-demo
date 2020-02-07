@@ -32,7 +32,7 @@ spec:
     hosts:
     - "*.demo.markieta.team.arctiq.ca"
     tls:
-      httpsRedirect: true
+      httpsRedirect: false
   - hosts:
     - "*.demo.markieta.team.arctiq.ca"
     port:
