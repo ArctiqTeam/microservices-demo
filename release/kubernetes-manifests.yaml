@@ -147,6 +147,7 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: recommendationservice
+  namespace: hipster-store
 spec:
   selector:
     matchLabels:
@@ -207,6 +208,7 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: frontend
+  namespace: hipster-store
 spec:
   selector:
     matchLabels:
