@@ -20,7 +20,7 @@ apiVersion: networking.istio.io/v1alpha3
 kind: Gateway
 metadata:
   name: frontend-gateway
-  namespace: hipster-store
+  namespace: onlineboutique
 spec:
   selector:
     istio: ingressgateway # use Istio default gateway implementation
@@ -36,7 +36,7 @@ apiVersion: networking.istio.io/v1alpha3
 kind: VirtualService
 metadata:
   name: frontend-ingress
-  namespace: hipster-store
+  namespace: onlineboutique
 spec:
   hosts:
   - "*"
@@ -53,7 +53,7 @@ apiVersion: networking.istio.io/v1alpha3
 kind: ServiceEntry
 metadata:
   name: currency-provider-external
-  namespace: hipster-store
+  namespace: onlineboutique
 spec:
   hosts:
   - www.ecb.europa.eu
@@ -69,10 +69,10 @@ apiVersion: networking.istio.io/v1alpha3
 kind: VirtualService
 metadata:
   name: frontend
-  namespace: hipster-store
+  namespace: onlineboutique
 spec:
   hosts:
-  - "frontend.hipster-store.svc.cluster.local"
+  - "frontend.onlineboutique.svc.cluster.local"
   http:
   - route:
     - destination:
@@ -84,7 +84,7 @@ apiVersion: networking.istio.io/v1alpha3
 kind: ServiceEntry
 metadata:
   name: whitelist-egress-googleapis
-  namespace: hipster-store
+  namespace: onlineboutique
 spec:
   hosts:
   - "accounts.google.com" # Used to get token
@@ -101,7 +101,7 @@ apiVersion: networking.istio.io/v1alpha3
 kind: ServiceEntry
 metadata:
   name: whitelist-egress-google-metadata
-  namespace: hipster-store
+  namespace: onlineboutique
 spec:
   hosts:
   - metadata.google.internal
