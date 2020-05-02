@@ -39,10 +39,10 @@ spec:
         env:
         - name: PORT
           value: "8080"
-        # - name: DISABLE_TRACING
-        #   value: "1"
+        - name: DISABLE_TRACING
+          value: "True"
         - name: DISABLE_PROFILER
-          value: "1"
+          value: "False"
         readinessProbe:
           periodSeconds: 5
           exec:
@@ -53,7 +53,7 @@ spec:
             command: ["/bin/grpc_health_probe", "-addr=:8080"]
         resources:
           requests:
-            cpu: 100m
+            cpu: 30m
             memory: 64Mi
           limits:
             cpu: 200m
@@ -113,17 +113,17 @@ spec:
             value: "currencyservice:7000"
           - name: CART_SERVICE_ADDR
             value: "cartservice:7070"
-          # - name: DISABLE_STATS
-          #   value: "1"
-          # - name: DISABLE_TRACING
-          #   value: "1"
-          # - name: DISABLE_PROFILER
-          #   value: "1"
+          - name: DISABLE_STATS
+            value: "True"
+          - name: DISABLE_TRACING
+            value: "True"
+          - name: DISABLE_PROFILER
+            value: "False"
           # - name: JAEGER_SERVICE_ADDR
           #   value: "jaeger-collector:14268"
           resources:
             requests:
-              cpu: 100m
+              cpu: 30m
               memory: 64Mi
             limits:
               cpu: 200m
@@ -176,15 +176,15 @@ spec:
           value: "8080"
         - name: PRODUCT_CATALOG_SERVICE_ADDR
           value: "productcatalogservice:3550"
-        # - name: DISABLE_TRACING
-        #   value: "1"
-        # - name: DISABLE_PROFILER
-        #   value: "1"
-        # - name: DISABLE_DEBUGGER
-        #   value: "1"
+        - name: DISABLE_TRACING
+          value: "True"
+        - name: DISABLE_PROFILER
+          value: "False"
+        - name: DISABLE_DEBUGGER
+          value: "False"
         resources:
           requests:
-            cpu: 100m
+            cpu: 30m
             memory: 220Mi
           limits:
             cpu: 200m
@@ -258,17 +258,15 @@ spec:
             value: "checkoutservice:5050"
           - name: AD_SERVICE_ADDR
             value: "adservice:9555"
-          - name: ENV_PLATFORM
-            value: "gcp"
-          # - name: DISABLE_TRACING
-          #   value: "1"
-          # - name: DISABLE_PROFILER
-          #   value: "1"
+          - name: DISABLE_TRACING
+            value: "True"
+          - name: DISABLE_PROFILER
+            value: "False"
           # - name: JAEGER_SERVICE_ADDR
           #   value: "jaeger-collector:14268"
           resources:
             requests:
-              cpu: 100m
+              cpu: 30m
               memory: 64Mi
             limits:
               cpu: 200m
@@ -281,20 +279,6 @@ metadata:
   namespace: hipster-store
 spec:
   type: ClusterIP
-  selector:
-    app: frontend
-  ports:
-  - name: http
-    port: 80
-    targetPort: 8080
----
-apiVersion: v1
-kind: Service
-metadata:
-  name: frontend-external
-  namespace: hipster-store
-spec:
-  type: LoadBalancer
   selector:
     app: frontend
   ports:
@@ -333,7 +317,7 @@ spec:
             command: ["/bin/grpc_health_probe", "-addr=:50051"]
         resources:
           requests:
-            cpu: 100m
+            cpu: 30m
             memory: 64Mi
           limits:
             cpu: 200m
@@ -376,12 +360,12 @@ spec:
         env:
         - name: PORT
           value: "3550"
-        # - name: DISABLE_STATS
-        #   value: "1"
-        # - name: DISABLE_TRACING
-        #   value: "1"
-        # - name: DISABLE_PROFILER
-        #   value: "1"
+        - name: DISABLE_STATS
+          value: "True"
+        - name: DISABLE_TRACING
+          value: "True"
+        - name: DISABLE_PROFILER
+          value: "False"
         # - name: JAEGER_SERVICE_ADDR
         #   value: "jaeger-collector:14268"
         readinessProbe:
@@ -392,7 +376,7 @@ spec:
             command: ["/bin/grpc_health_probe", "-addr=:3550"]
         resources:
           requests:
-            cpu: 100m
+            cpu: 30m
             memory: 64Mi
           limits:
             cpu: 200m
@@ -441,7 +425,7 @@ spec:
           value: "0.0.0.0"
         resources:
           requests:
-            cpu: 200m
+            cpu: 50m
             memory: 64Mi
           limits:
             cpu: 300m
@@ -499,11 +483,11 @@ spec:
           value: "10"
         resources:
           requests:
-            cpu: 300m
-            memory: 256Mi
+            cpu: 30m
+            memory: 128Mi
           limits:
-            cpu: 500m
-            memory: 512Mi
+            cpu: 200m
+            memory: 256Mi
 ---
 apiVersion: apps/v1
 kind: Deployment
@@ -529,12 +513,12 @@ spec:
         env:
         - name: PORT
           value: "7000"
-        # - name: DISABLE_TRACING
-        #   value: "1"
-        # - name: DISABLE_PROFILER
-        #   value: "1"
-        # - name: DISABLE_DEBUGGER
-        #   value: "1"
+        - name: DISABLE_TRACING
+          value: "True"
+        - name: DISABLE_PROFILER
+          value: "False"
+        - name: DISABLE_DEBUGGER
+          value: "False"
         readinessProbe:
           exec:
             command: ["/bin/grpc_health_probe", "-addr=:7000"]
@@ -543,7 +527,7 @@ spec:
             command: ["/bin/grpc_health_probe", "-addr=:7000"]
         resources:
           requests:
-            cpu: 100m
+            cpu: 30m
             memory: 64Mi
           limits:
             cpu: 200m
@@ -585,12 +569,12 @@ spec:
         env:
         - name: PORT
           value: "50051"
-        # - name: DISABLE_STATS
-        #   value: "1"
-        # - name: DISABLE_TRACING
-        #   value: "1"
-        # - name: DISABLE_PROFILER
-        #   value: "1"
+        - name: DISABLE_STATS
+          value: "True"
+        - name: DISABLE_TRACING
+          value: "True"
+        - name: DISABLE_PROFILER
+          value: "False"
         # - name: JAEGER_SERVICE_ADDR
         #   value: "jaeger-collector:14268"
         readinessProbe:
@@ -602,7 +586,7 @@ spec:
             command: ["/bin/grpc_health_probe", "-addr=:50051"]
         resources:
           requests:
-            cpu: 100m
+            cpu: 30m
             memory: 64Mi
           limits:
             cpu: 200m
@@ -657,7 +641,7 @@ spec:
             memory: 256Mi
             cpu: 125m
           requests:
-            cpu: 70m
+            cpu: 20m
             memory: 200Mi
       volumes:
       - name: redis-data
@@ -700,15 +684,15 @@ spec:
         env:
         - name: PORT
           value: "9555"
-        # - name: DISABLE_STATS
-        #   value: "1"
-        # - name: DISABLE_TRACING
-        #   value: "1"
+        - name: DISABLE_STATS
+          value: "True"
+        - name: DISABLE_TRACING
+          value: "True"
         #- name: JAEGER_SERVICE_ADDR
         #  value: "jaeger-collector:14268"
         resources:
           requests:
-            cpu: 200m
+            cpu: 40m
             memory: 180Mi
           limits:
             cpu: 300m
