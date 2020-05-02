@@ -22,10 +22,12 @@ from concurrent import futures
 
 import googleclouddebugger
 import googlecloudprofiler
+from google.auth.exceptions import DefaultCredentialsError
 import grpc
 from opencensus.trace.exporters import print_exporter
 from opencensus.trace.exporters import stackdriver_exporter
 from opencensus.trace.ext.grpc import server_interceptor
+from opencensus.common.transports.async_ import AsyncTransport
 from opencensus.trace.samplers import always_on
 
 import demo_pb2
@@ -89,30 +91,45 @@ if __name__ == "__main__":
     logger.info("initializing recommendationservice")
 
     try:
-      enable_profiler = os.environ["ENABLE_PROFILER"]
-      if enable_profiler != "1":
+      if "DISABLE_PROFILER" in os.environ:
         raise KeyError()
       else:
+        logger.info("Profiler enabled.")
         initStackdriverProfiling()
     except KeyError:
-      logger.info("Skipping Stackdriver Profiler Python agent initialization. Set environment variable ENABLE_PROFILER=1 to enable.")
+        logger.info("Profiler disabled.")
 
     try:
+      if "DISABLE_TRACING" in os.environ:
+        raise KeyError()
+      else:
+        logger.info("Tracing enabled.")
         sampler = always_on.AlwaysOnSampler()
-        exporter = stackdriver_exporter.StackdriverExporter()
+        exporter = stackdriver_exporter.StackdriverExporter(
+          project_id=os.environ.get('GCP_PROJECT_ID'),
+          transport=AsyncTransport)
         tracer_interceptor = server_interceptor.OpenCensusServerInterceptor(sampler, exporter)
-    except:
+    except (KeyError, DefaultCredentialsError):
+        logger.info("Tracing disabled.")
         tracer_interceptor = server_interceptor.OpenCensusServerInterceptor()
 
+
     try:
-        googleclouddebugger.enable(
-            module='recommendationserver',
-            version='1.0.0'
-        )
-    except Exception, err:
-        logger.error("could not enable debugger")
-        logger.error(traceback.print_exc())
-        pass
+      if "DISABLE_DEBUGGER" in os.environ:
+        raise KeyError()
+      else:
+        logger.info("Debugger enabled.")
+        try:
+          googleclouddebugger.enable(
+              module='recommendationserver',
+              version='1.0.0'
+          )
+        except Exception, err:
+            logger.error("Could not enable debugger")
+            logger.error(traceback.print_exc())
+            pass
+    except KeyError:
+        logger.info("Debugger disabled.")
 
     port = os.environ.get('PORT', "8080")
     catalog_addr = os.environ.get('PRODUCT_CATALOG_SERVICE_ADDR', '')
@@ -123,7 +140,8 @@ if __name__ == "__main__":
     product_catalog_stub = demo_pb2_grpc.ProductCatalogServiceStub(channel)
 
     # create gRPC server
-    server = grpc.server(futures.ThreadPoolExecutor(max_workers=10)) # ,interceptors=(tracer_interceptor,))
+    server = grpc.server(futures.ThreadPoolExecutor(max_workers=10),
+                      interceptors=(tracer_interceptor,))
 
     # add class to gRPC server
     service = RecommendationService()
