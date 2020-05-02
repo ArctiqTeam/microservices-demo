@@ -20,7 +20,7 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: emailservice
-
+  namespace: hipster-store
 spec:
   selector:
     matchLabels:
@@ -33,7 +33,7 @@ spec:
       terminationGracePeriodSeconds: 5
       containers:
       - name: server
-        image: gcr.io/arctiqteam-images/emailservice:v0.2.0
+        image: gcr.io/google-samples/microservices-demo/emailservice:v0.1.4
         ports:
         - containerPort: 8080
         env:
@@ -76,20 +76,20 @@ spec:
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: checkoutservice
+  name: shoppingcartservice
   namespace: hipster-store
 spec:
   selector:
     matchLabels:
-      app: checkoutservice
+      app: shoppingcartservice
   template:
     metadata:
       labels:
-        app: checkoutservice
+        app: shoppingcartservice
     spec:
       containers:
         - name: server
-          image: gcr.io/arctiqteam-images/checkoutservice:v0.2.0
+          image: gcr.io/google-samples/microservices-demo/checkoutservice:v0.1.4
           ports:
           - containerPort: 5050
           readinessProbe:
@@ -132,12 +132,12 @@ spec:
 apiVersion: v1
 kind: Service
 metadata:
-  name: checkoutservice
+  name: shoppingcartservice
   namespace: hipster-store
 spec:
   type: ClusterIP
   selector:
-    app: checkoutservice
+    app: shoppingcartservice
   ports:
   - name: grpc
     port: 5050
@@ -160,7 +160,7 @@ spec:
       terminationGracePeriodSeconds: 5
       containers:
       - name: server
-        image: gcr.io/arctiqteam-images/recommendationservice:v0.2.0
+        image: gcr.io/google-samples/microservices-demo/recommendationservice:v0.1.4
         ports:
         - containerPort: 8080
         readinessProbe:
@@ -222,7 +222,7 @@ spec:
     spec:
       containers:
         - name: server
-          image: gcr.io/arctiqteam-images/frontend:v0.2.0
+          image:  gcr.io/onlineboutique/frontend:v0.1.4
           imagePullPolicy: Always
           ports:
           - containerPort: 8080
@@ -256,7 +256,7 @@ spec:
           - name: SHIPPING_SERVICE_ADDR
             value: "shippingservice:50051"
           - name: CHECKOUT_SERVICE_ADDR
-            value: "checkoutservice:5050"
+            value: "shoppingcartservice:5050"
           - name: AD_SERVICE_ADDR
             value: "adservice:9555"
           - name: DISABLE_TRACING
@@ -304,7 +304,7 @@ spec:
       terminationGracePeriodSeconds: 5
       containers:
       - name: server
-        image: gcr.io/arctiqteam-images/paymentservice:v0.2.0
+        image: gcr.io/google-samples/microservices-demo/paymentservice:v0.1.4
         ports:
         - containerPort: 50051
         env:
@@ -355,7 +355,8 @@ spec:
       terminationGracePeriodSeconds: 5
       containers:
       - name: server
-        image: gcr.io/arctiqteam-images/productcatalogservice:v0.2.0
+        image: gcr.io/onlineboutique/productcatalogservice:v0.1.4
+        imagePullPolicy: Always
         ports:
         - containerPort: 3550
         env:
@@ -414,7 +415,7 @@ spec:
       terminationGracePeriodSeconds: 5
       containers:
       - name: server
-        image: gcr.io/arctiqteam-images/cartservice:v0.2.0
+        image: gcr.io/google-samples/microservices-demo/cartservice:v0.1.4
         ports:
         - containerPort: 7070
         env:
@@ -464,7 +465,7 @@ spec:
   selector:
     matchLabels:
       app: loadgenerator
-  replicas: 1
+  replicas: 2
   template:
     metadata:
       labels:
@@ -476,12 +477,12 @@ spec:
       restartPolicy: Always
       containers:
       - name: main
-        image: gcr.io/arctiqteam-images/loadgenerator:v0.2.0
+        image: gcr.io/google-samples/microservices-demo/loadgenerator:v0.1.4
         env:
         - name: FRONTEND_ADDR
           value: "frontend:80"
         - name: USERS
-          value: "10"
+          value: "3"
         resources:
           requests:
             cpu: 30m
@@ -507,7 +508,7 @@ spec:
       terminationGracePeriodSeconds: 5
       containers:
       - name: server
-        image: gcr.io/arctiqteam-images/currencyservice:v0.2.0
+        image: gcr.io/google-samples/microservices-demo/currencyservice:v0.1.4
         ports:
         - name: grpc
           containerPort: 7000
@@ -564,7 +565,7 @@ spec:
     spec:
       containers:
       - name: server
-        image: gcr.io/arctiqteam-images/shippingservice:v0.2.0
+        image: gcr.io/google-samples/microservices-demo/shippingservice:v0.1.4
         ports:
         - containerPort: 50051
         env:
@@ -679,7 +680,7 @@ spec:
       terminationGracePeriodSeconds: 5
       containers:
       - name: server
-        image: gcr.io/arctiqteam-images/adservice:v0.2.0
+        image: gcr.io/google-samples/microservices-demo/adservice:v0.1.4
         ports:
         - containerPort: 9555
         env:
