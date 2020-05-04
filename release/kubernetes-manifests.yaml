@@ -53,7 +53,7 @@ spec:
             command: ["/bin/grpc_health_probe", "-addr=:8080"]
         resources:
           requests:
-            cpu: 30m
+            cpu: 100m
             memory: 64Mi
           limits:
             cpu: 200m
@@ -123,7 +123,7 @@ spec:
           #   value: "jaeger-collector:14268"
           resources:
             requests:
-              cpu: 30m
+              cpu: 100m
               memory: 64Mi
             limits:
               cpu: 200m
@@ -184,7 +184,7 @@ spec:
         #  value: "False"
         resources:
           requests:
-            cpu: 30m
+            cpu: 100m
             memory: 220Mi
           limits:
             cpu: 200m
@@ -267,7 +267,7 @@ spec:
           #   value: "jaeger-collector:14268"
           resources:
             requests:
-              cpu: 30m
+              cpu: 100m
               memory: 64Mi
             limits:
               cpu: 200m
@@ -318,7 +318,7 @@ spec:
             command: ["/bin/grpc_health_probe", "-addr=:50051"]
         resources:
           requests:
-            cpu: 30m
+            cpu: 100m
             memory: 64Mi
           limits:
             cpu: 200m
@@ -377,7 +377,7 @@ spec:
             command: ["/bin/grpc_health_probe", "-addr=:3550"]
         resources:
           requests:
-            cpu: 30m
+            cpu: 100m
             memory: 64Mi
           limits:
             cpu: 200m
@@ -426,7 +426,7 @@ spec:
           value: "0.0.0.0"
         resources:
           requests:
-            cpu: 50m
+            cpu: 200m
             memory: 64Mi
           limits:
             cpu: 300m
@@ -484,11 +484,11 @@ spec:
           value: "10"
         resources:
           requests:
-            cpu: 30m
-            memory: 128Mi
-          limits:
-            cpu: 200m
+            cpu: 300m
             memory: 256Mi
+          limits:
+            cpu: 500m
+            memory: 512Mi
 ---
 apiVersion: apps/v1
 kind: Deployment
@@ -528,7 +528,7 @@ spec:
             command: ["/bin/grpc_health_probe", "-addr=:7000"]
         resources:
           requests:
-            cpu: 30m
+            cpu: 100m
             memory: 64Mi
           limits:
             cpu: 200m
@@ -587,7 +587,7 @@ spec:
             command: ["/bin/grpc_health_probe", "-addr=:50051"]
         resources:
           requests:
-            cpu: 30m
+            cpu: 100m
             memory: 64Mi
           limits:
             cpu: 200m
@@ -642,7 +642,7 @@ spec:
             memory: 256Mi
             cpu: 125m
           requests:
-            cpu: 20m
+            cpu: 70m
             memory: 200Mi
       volumes:
       - name: redis-data
@@ -693,7 +693,7 @@ spec:
         #  value: "jaeger-collector:14268"
         resources:
           requests:
-            cpu: 40m
+            cpu: 200m
             memory: 180Mi
           limits:
             cpu: 300m
