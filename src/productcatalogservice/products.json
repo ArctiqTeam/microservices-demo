@@ -2,7 +2,7 @@
     "products": [
         {
             "id": "OLJCESPC7Z",
-            "name": "Vintage Typewriter",
+            "name": "Arctiq Vintage Typewriter",
             "description": "This typewriter looks good in your living room.",
             "picture": "/static/img/products/typewriter.jpg",
             "priceUsd": {
