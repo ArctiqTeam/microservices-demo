@@ -176,7 +176,7 @@ header .h-control :-moz-placeholder {
 
 header .navbar.sub-navbar {
   height: 60px;
-  background-color: #111111;
+  background-color: rgb(24,54,105);
   font-size: 15px;
   color: #b4b2bb;
   padding-top: 0;
@@ -362,13 +362,13 @@ main.home {
 
 .h-jumbotron {
   border-radius: 0;
-  background: url(/static/images/HeroBannerImage2.png) no-repeat top center;
+  background: url(/static/images/beer-3570298_1280-blue.jpg) no-repeat center;
   background-size: cover;
 }
 
 .h-jumbotron .container img {
-  width: 280px;
-  height: 210px;
+  max-width: 420px;
+  height: auto;
 }
 
 .h-row {
@@ -392,7 +392,7 @@ main.home {
   font-size: 22px;
   letter-spacing: 4.8px;
   text-align: center;
-  color: #111111;
+  color: rgb(24,54,105);
   text-transform: uppercase;
   margin-bottom: 0;
 }
@@ -573,7 +573,7 @@ main.home {
 
 .gcp-platform,
 .gcp-platform .platform-flag {
-  background-color: #4285f4;
+  background-color: rgb(24,54,105);
 }
 
 

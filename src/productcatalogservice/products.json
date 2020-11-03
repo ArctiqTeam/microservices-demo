@@ -2,38 +2,39 @@
     "products": [
         {
             "id": "OLJCESPC7Z",
-            "name": "Arctiq Vintage Typewriter",
-            "description": "This typewriter looks good in your living room.",
-            "picture": "/static/img/products/typewriter.jpg",
+            "name": "Arctiq Lager",
+            "description": "This light tasting and straight-forward crispy boi goes down easy after a long day. Best served ARCTIQ cold.",
+            "picture": "/static/img/products/lager.png",
             "priceUsd": {
                 "currencyCode": "USD",
-                "units": 67,
+                "units": 4,
                 "nanos": 990000000
             },
-            "categories": ["vintage"]
+            "categories": ["beer", "lager"]
         },
         {
             "id": "66VCHSJNUP",
-            "name": "Vintage Camera Lens",
-            "description": "You won't have a camera to use it and it probably doesn't work anyway.",
-            "picture": "/static/img/products/camera-lens.jpg",
+            "name": "Day For Night Stout",
+            "description": "This delicious oatmeal stout pours as black as a cold January night. And with its high ABV% we hope you'll take your sweet time to sip, savour, and contemplate the lyrics of Gordon Downie, the Canadian poet-musician this beer is named after.",
+            "picture": "/static/img/products/stout.jpg",
             "priceUsd": {
                 "currencyCode": "USD",
-                "units": 12,
+                "units": 6,
                 "nanos": 490000000
             },
-            "categories": ["photography", "vintage"]
+            "categories": ["beer", "stout"]
         },
         {
             "id": "1YMWWN1N4O",
-            "name": "Home Barista Kit",
-            "description": "Always wanted to brew coffee with Chemex and Aeropress at home?",
-            "picture": "/static/img/products/barista-kit.jpg",
+            "name": "HopCTL IPA",
+            "description": "It won't surprise you that many of our DevOps friends reach for the big bold hop-forward flavours of our HopCTRL IPA. Hazy, juicy, impossibly soft mouthfeel and resinous, dank pine notes for days.",
+            "picture": "/static/img/products/ipa.jpg",
             "priceUsd": {
                 "currencyCode": "USD",
-                "units": 124
+                "units": 5,
+                "nanos": 990000000
             },
-            "categories": ["cookware"]
+            "categories": ["beer", "ipa"]
         },
         {
             "id": "L9ECAV7KIM",
