@@ -14,11 +14,11 @@
         },
         {
             "id": "66VCHSJNUP",
-            "name": "Day For Night Stout",
+            "name": "50 Mission Ops Stout",
             "description": "This delicious oatmeal stout pours as black as a cold January night. And with its high ABV% we hope you'll take your sweet time to sip, savour, and contemplate the lyrics of Gordon Downie, the Canadian poet-musician this beer is named after.",
-            "picture": "/static/img/products/stout.jpg",
+            "picture": "/static/img/products/stout.png",
             "priceUsd": {
-                "currencyCode": "USD",
+                "currencyCode": "USD",  
                 "units": 6,
                 "nanos": 490000000
             },
@@ -26,9 +26,9 @@
         },
         {
             "id": "1YMWWN1N4O",
-            "name": "HopCTL IPA",
+            "name": "HopsCTL IPA",
             "description": "It won't surprise you that many of our DevOps friends reach for the big bold hop-forward flavours of our HopCTRL IPA. Hazy, juicy, impossibly soft mouthfeel and resinous, dank pine notes for days.",
-            "picture": "/static/img/products/ipa.jpg",
+            "picture": "/static/img/products/ipa.png",
             "priceUsd": {
                 "currencyCode": "USD",
                 "units": 5,
@@ -38,74 +38,74 @@
         },
         {
             "id": "L9ECAV7KIM",
-            "name": "Terrarium",
-            "description": "This terrarium will looks great in your white painted living room.",
-            "picture": "/static/img/products/terrarium.jpg",
+            "name": "Docker Bock",
+            "description": "Ein prosit! This German-style festbier will bring back fond and (most likely foggy) memories of last year's KontainerFest!  How was KontainerFest, you ask?  We don't remember either! ",
+            "picture": "/static/img/products/bock.png",
             "priceUsd": {
                 "currencyCode": "USD",
-                "units": 36,
-                "nanos": 450000000
+                "units": 6,
+                "nanos": 490000000
             },
-            "categories": ["gardening"]
+            "categories": ["beer", "bock"]
         },
         {
             "id": "2ZYFJ3GM2N",
-            "name": "Film Camera",
-            "description": "This camera looks like it's a film camera, but it's actually digital.",
-            "picture": "/static/img/products/film-camera.jpg",
+            "name": "CI/CD APA (Australian Pale Ale)",
+            "description": "Crikey, this APA features everything you love about ‘Down Under’ in a glass!  Bold, citrusy Galaxy hops lead the flavour charge, with subtle hints of outback grass, spiced brewer’s yeast (Vegemite, anyone?), and a delightful briney finish reminiscent of the Great Barrier Reef.  Crank it up to 11 because this brew is HIGH VOLTAGE!",
+            "picture": "/static/img/products/apa.png",
             "priceUsd": {
                 "currencyCode": "USD",
-                "units": 2245
+                "units": 5
             },
-            "categories": ["photography", "vintage"]
+            "categories": ["beer", "apa"]
         },
         {
             "id": "0PUK6V6EV0",
-            "name": "Vintage Record Player",
-            "description": "It still works.",
-            "picture": "/static/img/products/record-player.jpg",
+            "name": "NodeStar Sour Ale",
+            "description": "Transmit big, bright ideas with this plucky and puckery kettle sour ale. Light bodied but full of tart flavour, it's the perfect summer quencher. ",
+            "picture": "/static/img/products/sour.png",
             "priceUsd": {
                 "currencyCode": "USD",
-                "units": 65,
+                "units": 5,
                 "nanos": 500000000
             },
-            "categories": ["music", "vintage"]
+            "categories": ["beer", "sour"]
         },
         {
             "id": "LS4PSXUNUM",
-            "name": "Metal Camping Mug",
-            "description": "You probably don't go camping that often but this is better than plastic cups.",
-            "picture": "/static/img/products/camp-mug.jpg",
+            "name": "DevHops T-shirt",
+            "description": "Rep your favourite brewery with this sweet DevHops t-shirt.  Also available in Cheetos orange.  Vanity sizing, order 3-4 sizes down.",
+            "picture": "/static/img/products/tshirt.png",
             "priceUsd": {
                 "currencyCode": "USD",
                 "units": 24,
                 "nanos": 330000000
             },
-            "categories": ["cookware"]
+            "categories": ["apparel", "t-shirt"]
         },
         {
             "id": "9SIQT8TOJO",
-            "name": "City Bike",
-            "description": "This single gear bike probably cannot climb the hills of San Francisco.",
-            "picture": "/static/img/products/city-bike.jpg",
+            "name": "DevHops Foam Koozie",
+            "description": "Keep your beer cold with this funky DevHops beer koozie. Rep your favourite brewery even when you fill the kooz with, ahem, that other brewery's swill.",
+            "picture": "/static/img/products/koozie.png",
             "priceUsd": {
                 "currencyCode": "USD",
-                "units": 789,
+                "units": 5,
                 "nanos": 500000000
             },
-            "categories": ["cycling"]
+            "categories": ["accessories"]
         },
         {
             "id": "6E92ZMYYFZ",
-            "name": "Air Plant",
-            "description": "Have you ever wondered whether air plants need water? Buy one and figure out.",
-            "picture": "/static/img/products/air-plant.jpg",
+            "name": "DevHops Hoodie",
+            "description": "We know every developer worth their salt already has a million hoodies.  Bet you don't have one that is literally the colour of beer.  Stand out from the crowd with this sweet tarp.",
+            "picture": "/static/img/products/hoodie.png",
             "priceUsd": {
                 "currencyCode": "USD",
-                "units": 12,
+                "units": 40,
                 "nanos": 300000000
             },
-            "categories": ["gardening"]
+            "categories": ["apparel", "hoodie"]
         }
     ]
 }
